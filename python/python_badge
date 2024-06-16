@@ -1,4 +1,10 @@
-# euler problem 1
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+#### euler problems ####
+# euler 1
 def sum_of(limit):
     total_sum = 0
     for i in range(limit):
@@ -10,8 +16,8 @@ answer = sum_of(1000)
 print(answer)
 
 
-# euler problem 2
-def sum_of(limit):
+# euler 2
+def sum_even(limit):
     a, b = 1, 2 
     total_sum = 0
     while a <= limit:
@@ -21,11 +27,11 @@ def sum_of(limit):
     return total_sum
 
 limit = 4000000
-answer = sum_of(limit)
+answer = sum_even(limit)
 print(answer)
 
 
-# euler problem 3
+# euler 3
 def largest_prime_factor(n):
     while n % 2 == 0:
         max_prime = 2
@@ -45,11 +51,8 @@ result = largest_prime_factor(number)
 print(result)
 
 
+#### distributions #####
 # normal distribution
-import random
-import matplotlib.pyplot as plt
-import numpy as np
-
 def generator_normal(mu, sigma, sample_size):
     return [random.normalvariate(mu, sigma) for i in range(sample_size)]
 
@@ -59,10 +62,10 @@ sample_size = 10000
 random_numbers = generator_normal(mean, stan_dev, sample_size)
 
 plt.hist(random_numbers, bins=20, edgecolor='black', alpha=0.7)
-plt.title('Histogram of Normally Distributed Random Numbers')
-plt.xlabel('Value')
-plt.ylabel('Frequency')
-plt.show()
+    plt.title('Histogram of Normally Distributed Random Numbers')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.show()
 
 
 # uniform distribution
