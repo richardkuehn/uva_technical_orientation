@@ -1,1 +1,153 @@
-matplotlib
+# euler problem 1
+def sum_of(limit):
+    total_sum = 0
+    for i in range(limit):
+        if i % 3 == 0 or i % 5 == 0:
+            total_sum += i
+    return total_sum
+
+answer = sum_of(1000)
+print(answer)
+
+
+# euler problem 2
+def sum_of(limit):
+    a, b = 1, 2 
+    total_sum = 0
+    while a <= limit:
+        if a % 2 == 0:
+            total_sum += a
+        a, b = b, a + b  # Move to the next Fibonacci numbers
+    return total_sum
+
+limit = 4000000
+answer = sum_of(limit)
+print(answer)
+
+
+# euler problem 3
+def largest_prime_factor(n):
+    while n % 2 == 0:
+        max_prime = 2
+        n //= 2
+    factor = 3
+    while factor * factor <= n:
+        while n % factor == 0:
+            max_prime = factor
+            n //= factor
+        factor += 2
+    if n > 2:
+        max_prime = n
+    return max_prime
+
+number = 600851475143
+result = largest_prime_factor(number)
+print(result)
+
+
+# normal distribution
+import random
+import matplotlib.pyplot as plt
+import numpy as np
+
+def generator_normal(mu, sigma, sample_size):
+    return [random.normalvariate(mu, sigma) for i in range(sample_size)]
+
+mean = 50
+stan_dev = 10
+sample_size = 10000
+random_numbers = generator_normal(mean, stan_dev, sample_size)
+
+plt.hist(random_numbers, bins=20, edgecolor='black', alpha=0.7)
+plt.title('Histogram of Normally Distributed Random Numbers')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+
+# uniform distribution
+def generator_uniform(lower, upper, sample_size):
+    return [random.uniform(lower, upper) for i in range(sample_size)]
+
+lower = 0.0       
+upper = 1.0       
+sample_size2 = 1000
+random_numbers2 = generator_uniform(lower, upper, sample_size)
+
+plt.hist(random_numbers2, bins=30, edgecolor='black', alpha=0.7)
+plt.title('Histogram of Uniformly Distributed Random Numbers')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+
+# binomial distribution
+def generator_binomial(n, p, sample_size3):
+    return [np.random.binomial(n, p) for i in range(sample_size3)]
+
+n = 20
+p = 0.5          
+sample_size3 = 40 
+random_numbers3 = generator_binomial(n, p, sample_size3)
+
+plt.hist(random_numbers3, bins=range(n+2), edgecolor='black', alpha=0.7)
+plt.title(f'Histogram of Binomial({n}, {p}) Distributed Random Numbers')
+plt.xlabel('Number of Successes')
+plt.ylabel('Frequency')
+plt.xticks(range(n+1))
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show() 
+
+
+# binomial and normal converge
+# low binomial
+n = 20
+p = 0.5          
+sample_size3 = 40 
+random_numbers3 = generator_binomial(n, p, sample_size3)
+
+plt.hist(random_numbers3, bins=range(n+2), edgecolor='black', alpha=0.7)
+plt.title(f'Histogram of Binomial({n}, {p}) Distributed Random Numbers')
+plt.xlabel('Number of Successes')
+plt.ylabel('Frequency')
+plt.xticks(range(n+1))
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show() 
+
+# high binomial
+n = 20
+p = 0.5          
+sample_size3 = 4000
+random_numbers3 = generator_binomial(n, p, sample_size3)
+
+plt.hist(random_numbers3, bins=range(n+2), edgecolor='black', alpha=0.7)
+plt.title(f'Histogram of Binomial({n}, {p}) Distributed Random Numbers')
+plt.xlabel('Number of Successes')
+plt.ylabel('Frequency')
+plt.xticks(range(n+1))
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show() 
+
+# low normal
+mean = 50
+stan_dev = 10
+sample_size = 100
+random_numbers1 = generator_normal(mean, stan_dev, sample_size)
+
+plt.hist(random_numbers1, bins=20, edgecolor='black', alpha=0.7)
+plt.title('Histogram of Normally Distributed Random Numbers')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+# high normal
+mean = 50
+stan_dev = 10
+sample_size = 10000
+random_numbers1 = generator_normal(mean, stan_dev, sample_size)
+
+plt.hist(random_numbers1, bins=20, edgecolor='black', alpha=0.7)
+plt.title('Histogram of Normally Distributed Random Numbers')
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
