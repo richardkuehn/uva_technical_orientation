@@ -1,3 +1,0 @@
-print ("hello world")
-git config --global user.name "Richard 'Ricky' Kuehn"
-git config --global user.email "richardprinzkuehn@gmail.com"
