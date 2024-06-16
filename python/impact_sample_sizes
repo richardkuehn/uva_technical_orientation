@@ -1,0 +1,27 @@
+import random
+from matplotlib import pyplot as plt
+
+# Function to generate random numbers with normal distribution
+def generator_normal(mu, sigma, sample_size):
+    return [random.normalvariate(mu, sigma) for _ in range(sample_size)]
+
+# Example parameters
+mean = 50         # Mean of the distribution
+std_dev = 10      # Standard deviation of the distribution
+
+# Different sample sizes to demonstrate the effect
+sample_sizes = [10, 50, 100, 500, 1000]
+
+# Plot histograms for each sample size
+plt.figure(figsize=(12, 8))
+
+for i, sample_size in enumerate(sample_sizes, 1):
+    plt.subplot(2, 3, i)
+    random_numbers = generator_normal(mean, std_dev, sample_size)
+    plt.hist(random_numbers, bins=20, edgecolor='black', alpha=0.7)
+    plt.title(f'Sample Size = {sample_size}')
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
