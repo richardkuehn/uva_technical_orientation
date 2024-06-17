@@ -2,6 +2,7 @@
 install.packages("tidyverse")
 install.packages("ggplot2")
 library(tidyverse)
+library(ggplot2)
 
 #### euler problems ####
 # euler 1
@@ -15,7 +16,6 @@ for (i in 1:999) {
 }
 
 print(answer)
-
 
 # euler 2
 a <- 0
@@ -35,7 +35,6 @@ while (TRUE) {
 }
 
 print(sum_even)
-
 
 # euler 3
 is_prime <- function(n) {
@@ -75,5 +74,106 @@ print(result)
 
 
 #### distributions ####
+# Normal distribution
+generator_normal <- function(mu, sigma, sample_size) {
+  rnorm(sample_size, mean = mu, sd = sigma)
+}
 
+mean <- 50
+stan_dev <- 10
+sample_size <- 10000
+random_numbers <- generator_normal(mean, stan_dev, sample_size)
+
+ggplot(data.frame(x = random_numbers), aes(x)) +
+  geom_histogram(bins = 20, color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle('Histogram of Normally Distributed Random Numbers') +
+  xlab('Value') +
+  ylab('Frequency')
+
+# Uniform distribution
+generator_uniform <- function(lower, upper, sample_size) {
+  runif(sample_size, min = lower, max = upper)
+}
+
+lower <- 0.0
+upper <- 1.0
+sample_size2 <- 1000
+random_numbers2 <- generator_uniform(lower, upper, sample_size2)
+
+ggplot(data.frame(x = random_numbers2), aes(x)) +
+  geom_histogram(bins = 30, color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle('Histogram of Uniformly Distributed Random Numbers') +
+  xlab('Value') +
+  ylab('Frequency')
+
+# Binomial distribution
+generator_binomial <- function(n, p, sample_size) {
+  rbinom(sample_size, size = n, prob = p)
+}
+
+n <- 20
+p <- 0.5
+sample_size3 <- 40
+random_numbers3 <- generator_binomial(n, p, sample_size3)
+
+ggplot(data.frame(x = random_numbers3), aes(x)) +
+  geom_histogram(breaks = seq(-0.5, n + 0.5, by = 1), color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle(paste('Histogram of Binomial(', n, ', ', p, ') Distributed Random Numbers', sep = '')) +
+  xlab('Number of Successes') +
+  ylab('Frequency') +
+  scale_x_continuous(breaks = 0:n) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  theme_minimal()
+
+
+#### binomial and normal converge ####
+# Low binomial
+n <- 20
+p <- 0.5
+sample_size3 <- 40
+random_numbers3 <- generator_binomial(n, p, sample_size3)
+
+ggplot(data.frame(x = random_numbers3), aes(x)) +
+  geom_histogram(breaks = seq(-0.5, n + 0.5, by = 1), color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle(paste('Histogram of Binomial(', n, ', ', p, ') Distributed Random Numbers', sep = '')) +
+  xlab('Number of Successes') +
+  ylab('Frequency') +
+  scale_x_continuous(breaks = 0:n) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  theme_minimal()
+
+# High binomial
+sample_size3 <- 4000
+random_numbers3 <- generator_binomial(n, p, sample_size3)
+
+ggplot(data.frame(x = random_numbers3), aes(x)) +
+  geom_histogram(breaks = seq(-0.5, n + 0.5, by = 1), color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle(paste('Histogram of Binomial(', n, ', ', p, ') Distributed Random Numbers', sep = '')) +
+  xlab('Number of Successes') +
+  ylab('Frequency') +
+  scale_x_continuous(breaks = 0:n) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  theme_minimal()
+
+# Low normal
+mean <- 50
+stan_dev <- 10
+sample_size <- 100
+random_numbers1 <- generator_normal(mean, stan_dev, sample_size)
+
+ggplot(data.frame(x = random_numbers1), aes(x)) +
+  geom_histogram(bins = 20, color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle('Histogram of Normally Distributed Random Numbers') +
+  xlab('Value') +
+  ylab('Frequency')
+
+# High normal
+sample_size <- 10000
+random_numbers1 <- generator_normal(mean, stan_dev, sample_size)
+
+ggplot(data.frame(x = random_numbers1), aes(x)) +
+  geom_histogram(bins = 20, color = "black", fill = "blue", alpha = 0.7) +
+  ggtitle('Histogram of Normally Distributed Random Numbers') +
+  xlab('Value') +
+  ylab('Frequency')
 
